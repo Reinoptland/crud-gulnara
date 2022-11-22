@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
@@ -11,7 +11,7 @@ import styles from "../styles/Home.module.css";
 // (JSON -> JavaScript Object Notation, string you can turn into a JS object)
 // 3. X We store the  data from the api (with useState)
 // 4. X We want to display the data to the user
-// 5. We want to make this request when the page loads (automatically)
+// 5. X We want to make this request when the page loads (automatically)
 
 export default function Read() {
   const [cat, setCat] = useState({});
@@ -24,6 +24,11 @@ export default function Read() {
     console.log("JSON", data);
     setCat(data);
   }
+
+  // fetch one cat on startup
+  useEffect(() => {
+    fetchCat();
+  }, []);
 
   console.log("CAT:", cat);
 
