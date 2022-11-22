@@ -6,8 +6,11 @@ import styles from "../styles/Home.module.css";
 // (Application Programming Interface -> Server where you can fetch data from)
 // https://cataas.com/cat?json=true
 // 2. X We need to make a request (using fetch)
-// 3. X We store the data from the api
-// 4. We want to display the data to the user
+// - make request
+// - read the JSON data from the request
+// (JSON -> JavaScript Object Notation, string you can turn into a JS object)
+// 3. X We store the  data from the api (with useState)
+// 4. X We want to display the data to the user
 // 5. We want to make this request when the page loads (automatically)
 
 export default function Read() {
@@ -16,10 +19,10 @@ export default function Read() {
   async function fetchCat() {
     console.log("FETCHING ...");
     const response = await fetch("https://cataas.com/cat?json=true");
-    const json = await response.json();
+    const data = await response.json();
     console.log("RES", response);
-    console.log("JSON", json);
-    setCat(json);
+    console.log("JSON", data);
+    setCat(data);
   }
 
   console.log("CAT:", cat);
@@ -35,6 +38,11 @@ export default function Read() {
       <main className={styles.main}>
         <h1 className={styles.title}>Fetching data</h1>
         <button onClick={fetchCat}>GET A CAT!</button>
+        {cat.url ? (
+          <img src={`https://cataas.com${cat.url}`} />
+        ) : (
+          "Click to see a kitty"
+        )}
       </main>
     </div>
   );
